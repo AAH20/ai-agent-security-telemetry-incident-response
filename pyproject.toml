@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agentir"
+version = "0.1.0"
+description = "OpenTelemetry security events, detections, and forensic incident response for AI agents and MCP systems"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "Apache-2.0"}
+keywords = ["ai agent security", "ai agent monitoring", "ai agent observability", "ai incident response", "mcp security", "llm security", "opentelemetry genai"]
+
+[project.scripts]
+agentir = "agentir.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

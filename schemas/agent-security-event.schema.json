@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://a2zsoc.com/schemas/agent-security-event/v1.json",
+  "title": "AI Agent Security Event",
+  "type": "object",
+  "required": ["event.name", "timestamp", "severity_number", "trace_id", "gen_ai.agent.id", "gen_ai.operation.name", "agent.security.tenant.id_hash"],
+  "properties": {
+    "event.name": {"type":"string","pattern":"^gen_ai\\.security\\."},
+    "event.id": {"type":"string"},
+    "timestamp": {"type":"string","format":"date-time"},
+    "severity_number": {"type":"integer","minimum":1,"maximum":24},
+    "trace_id": {"type":"string"},
+    "gen_ai.agent.id": {"type":"string"},
+    "gen_ai.operation.name": {"enum":["create_agent","invoke_agent","invoke_workflow","execute_tool","retrieval","chat"]},
+    "gen_ai.tool.name": {"type":"string"},
+    "agent.security.tenant.id_hash": {"type":"string","pattern":"^sha256:"},
+    "agent.security.principal.id_hash": {"type":"string","pattern":"^sha256:"},
+    "agent.security.delegation.id_hash": {"type":"string","pattern":"^sha256:"},
+    "agent.security.intent.id_hash": {"type":"string","pattern":"^sha256:"},
+    "agent.security.authorization.decision": {"enum":["allow","deny","allow_with_approval"]},
+    "agent.security.approval.present": {"type":"boolean"},
+    "agent.security.input.trust": {"enum":["trusted","untrusted","unknown"]},
+    "agent.security.action.reversibility": {"enum":["reversible","irreversible","unknown"]},
+    "agent.security.risk.score": {"type":"number","minimum":0,"maximum":100},
+    "agent.security.containment.action": {"type":"string"},
+    "agent.security.content.capture": {"enum":["disabled","explicit_opt_in"]}
+  },
+  "additionalProperties": true
+}

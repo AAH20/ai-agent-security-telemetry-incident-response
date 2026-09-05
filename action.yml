@@ -1,0 +1,24 @@
+name: AgentIR AI Agent Security Detection Regression
+description: Replay AI agent and MCP incidents against portable security detections
+branding:
+  icon: activity
+  color: blue
+inputs:
+  events:
+    description: JSONL security events to replay
+    required: true
+  rules:
+    description: AgentIR rules file
+    required: false
+    default: detections/rules.json
+  output:
+    description: Forensic package output
+    required: false
+    default: reports/agentir-forensic-package.json
+runs:
+  using: composite
+  steps:
+    - shell: bash
+      run: python -m pip install "${{ github.action_path }}"
+    - shell: bash
+      run: agentir replay "${{ inputs.events }}" --rules "${{ inputs.rules }}" --output "${{ inputs.output }}"

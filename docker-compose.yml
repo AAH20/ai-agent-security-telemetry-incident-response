@@ -1,0 +1,6 @@
+services:
+  indirect-prompt-injection:
+    build: .
+    command: ["replay", "incidents/01-indirect-prompt-injection/events.jsonl", "--output", "/reports/incident.json"]
+    volumes:
+      - ./reports:/reports
